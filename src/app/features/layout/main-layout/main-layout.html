@@ -1,0 +1,91 @@
+<div class="layout-shell" [class.layout-shell--collapsed]="isSidebarCollapsed">
+  <aside class="sidebar" [class.sidebar--collapsed]="isSidebarCollapsed">
+    <div class="brand">
+      <div class="brand__logo">🚀</div>
+      @if (!isSidebarCollapsed) {
+        <div class="brand__title">TCC System</div>
+      }
+    </div>
+
+    @if (!isSidebarCollapsed) {
+      <div class="sidebar-section-title">HOME</div>
+    }
+
+    <nav class="menu-list">
+      @for (menu of menus; track menu.route) {
+        <a
+          class="menu-item"
+          [routerLink]="menu.route"
+          routerLinkActive="menu-item--active"
+          [attr.title]="isSidebarCollapsed ? (menu.title + ' (' + menu.code + ')') : null">
+
+          <span class="menu-item__icon">{{ menu.icon }}</span>
+
+          @if (!isSidebarCollapsed) {
+            <span class="menu-item__label">
+              {{ menu.title }} <span class="code">({{ menu.code }})</span>
+            </span>
+          }
+        </a>
+      }
+    </nav>
+
+    <div class="sidebar-footer">
+      <div
+        class="profile-card clickable-profile"
+        nz-dropdown
+        nzTrigger="click"
+        [nzDropdownMenu]="userMenu">
+        <div class="profile-card__avatar">👤</div>
+
+        @if (!isSidebarCollapsed) {
+          <div>
+            <div class="profile-card__name">{{ username }}</div>
+            <div class="profile-card__role">Admin</div>
+          </div>
+        }
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-area">
+    <header class="topbar">
+      <div class="topbar__left">
+        <button class="icon-btn" type="button" (click)="toggleSidebar()">☰</button>
+        <div class="topbar__title">TCC Admin</div>
+      </div>
+
+      <div class="topbar__center">
+        <input class="search-box" type="text" placeholder="Try to searching ..." />
+      </div>
+
+      <div class="topbar__right">
+        <button class="icon-btn" type="button">🌙</button>
+        <button class="icon-btn" type="button">🔔</button>
+        <button class="icon-btn" type="button">⚙️</button>
+
+        <div
+          class="topbar-user clickable-profile"
+          nz-dropdown
+          nzTrigger="click"
+          [nzDropdownMenu]="userMenu">
+          <div class="topbar-user__avatar">👤</div>
+          <div>
+            <div class="topbar-user__name">{{ username }}</div>
+            <div class="topbar-user__role">Admin</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<nz-dropdown-menu #userMenu="nzDropdownMenu">
+  <ul nz-menu>
+    <li nz-menu-item (click)="logout()">Logout</li>
+  </ul>
+</nz-dropdown-menu>

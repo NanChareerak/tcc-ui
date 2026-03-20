@@ -1,0 +1,28 @@
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="mock-header">IT 02-2</div>
+
+    <div class="auth-body">
+      <div class="form-area">
+        <div class="form-row">
+          <label>User</label>
+          <input [(ngModel)]="username" name="username" type="text" />
+        </div>
+
+        <div class="form-row">
+          <label>Password</label>
+          <input [(ngModel)]="password" name="password" type="password" />
+        </div>
+
+        <div class="form-row">
+          <label>Confirm Password</label>
+          <input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" />
+        </div>
+
+        <button class="action-btn" type="button" (click)="onRegister()">
+          สมัครสมาชิก
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

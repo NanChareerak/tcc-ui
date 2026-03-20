@@ -1,0 +1,55 @@
+.page-header {
+  margin-bottom: 20px;
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+    color: #6b7280;
+  }
+}
+
+.person-card {
+  background: #fff;
+  border: 1px solid #e6ebf2;
+  border-radius: 20px;
+  padding: 20px;
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__pagination {
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 420px;
+  max-width: 100%;
+
+  input {
+    flex: 1;
+  }
+}
+
+.pagination-summary {
+  font-size: 14px;
+  color: #4b5563;
+}

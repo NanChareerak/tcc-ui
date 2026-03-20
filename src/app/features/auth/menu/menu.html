@@ -1,0 +1,22 @@
+<div class="menu-page">
+  <div class="menu-shell">
+    <div class="top-bar">
+      <div class="top-bar__title">TCC System Menu</div>
+      <div class="top-bar__user">User : {{ username }}</div>
+    </div>
+
+    <div class="menu-content">
+      <div class="menu-header">Main Menu (IT01 - IT10)</div>
+
+      <div class="menu-grid">
+        @for (item of menus; track item.code) {
+          <a class="menu-card" [routerLink]="item.route">
+            <div class="menu-card__code">{{ item.code }}</div>
+            <div class="menu-card__title">{{ item.title }}</div>
+            <div class="menu-card__desc">{{ item.description }}</div>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</div>

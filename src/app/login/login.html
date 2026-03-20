@@ -1,0 +1,25 @@
+<div class="auth-page">
+  <div class="auth-box">
+    <div class="mock-header">IT 02-1</div>
+
+    <div class="auth-body">
+      <div class="form-area">
+        <div class="form-row">
+          <label>User</label>
+          <input [(ngModel)]="username" name="username" type="text" />
+        </div>
+
+        <div class="form-row">
+          <label>Password</label>
+          <input [(ngModel)]="password" name="password" type="password" />
+        </div>
+
+        <button class="action-btn" type="button" (click)="onLogin()">
+          ลงชื่อเข้าใช้งาน
+        </button>
+
+        <a class="register-link" routerLink="/register">สมัครสมาชิก</a>
+      </div>
+    </div>
+  </div>
+</div>

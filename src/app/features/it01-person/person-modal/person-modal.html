@@ -1,0 +1,51 @@
+<nz-modal
+  [(nzVisible)]="visible"
+  [nzTitle]="isViewMode ? 'IT 01-3' : 'IT 01-2'"
+  [nzFooter]="null"
+  [nzClosable]="false"
+  [nzMaskClosable]="false"
+  [nzWidth]="760"
+>
+  <ng-container *nzModalContent>
+    <div class="form">
+
+      <div class="row">
+        <label>ชื่อ - สกุล</label>
+        <div class="name">
+          <input [(ngModel)]="data.firstName" [disabled]="isViewMode" />
+          <input [(ngModel)]="data.lastName" [disabled]="isViewMode" />
+        </div>
+      </div>
+
+      <div class="row">
+        <label>วันเกิด</label>
+        <input
+          type="date"
+          [(ngModel)]="data.birthDate"
+          (ngModelChange)="onBirthDateChange()"
+          [disabled]="isViewMode"
+        />
+      </div>
+
+      <div class="row">
+        <label>อายุ</label>
+        <div>{{ data.age }} ปี</div>
+      </div>
+
+      <div class="row">
+        <label>ที่อยู่</label>
+        <textarea [(ngModel)]="data.address" [disabled]="isViewMode"></textarea>
+      </div>
+
+      <div class="actions">
+        @if (!isViewMode) {
+          <button nz-button nzType="primary" (click)="onSave()">บันทึก</button>
+          <button nz-button nzDanger (click)="close()">ยกเลิก</button>
+        } @else {
+          <button nz-button nzDanger (click)="close()">ปิด</button>
+        }
+      </div>
+
+    </div>
+  </ng-container>
+</nz-modal>

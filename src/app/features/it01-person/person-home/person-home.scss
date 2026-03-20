@@ -1,0 +1,48 @@
+.page-header {
+  margin-bottom: 20px;
+
+  h1 {
+    margin: 0 0 6px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .breadcrumb {
+    font-size: 14px;
+    color: #6b7280;
+  }
+}
+
+.person-layout-card {
+  background: #ffffff;
+  border: 1px solid #e6ebf2;
+  border-radius: 22px;
+  padding: 24px;
+
+  &__header {
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f2937;
+  }
+
+  &__content {
+    min-height: 420px;
+  }
+}
+
+.placeholder-box {
+  min-height: 360px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  font-size: 18px;
+  background: #f8fafc;
+}
