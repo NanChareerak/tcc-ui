@@ -30,9 +30,13 @@ export const routes: Routes = [
       { path: 'it07-qrcode', component: ModulePlaceholder, data: { title: 'IT07 - QRCode' } },
       { path: 'it08-quiz', component: ModulePlaceholder, data: { title: 'IT08 - Quiz' } },
       { path: 'it09-comment', component: ModulePlaceholder, data: { title: 'IT09 - Comment' } },
-      { path: 'it10-dashboard', component: ModulePlaceholder, data: { title: 'IT10 - Dashboard' } }
-    ]
+      { path: 'it10-dashboard', component: ModulePlaceholder, data: { title: 'IT10 - Dashboard' } },
+      {
+        path: '**',
+        redirectTo: '',
+      },
+    ],
   },
 
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'login' },
 ];
