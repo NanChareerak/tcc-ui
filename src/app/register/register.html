@@ -19,9 +19,17 @@
           <input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" />
         </div>
 
-        <button class="action-btn" type="button" (click)="onRegister()">
-          สมัครสมาชิก
+        <button class="action-btn" type="button" (click)="onRegister()" [disabled]="loading">
+          {{ loading ? 'กำลังสมัครสมาชิก...' : 'สมัครสมาชิก' }}
         </button>
+
+        <div class="error-message" *ngIf="errorMessage">
+          {{ errorMessage }}
+        </div>
+
+        <div class="success-message" *ngIf="successMessage">
+          {{ successMessage }}
+        </div>
       </div>
     </div>
   </div>
