@@ -1,7 +1,18 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  OnChanges,
+  SimpleChanges,
+  Input
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { finalize, Subject, takeUntil } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
+
+import { LoginAppService } from '../core/service/app/login.app-service';
+import { LoginRequest } from '../core/models/login-model';
+import { AppError } from '../core/models/common-model';
 
 @Component({
   selector: 'app-login',
@@ -10,24 +21,45 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.html',
   styleUrl: './login.scss'
 })
-export class Login {
+export class Login implements OnInit, OnDestroy, OnChanges {
+  @Input() returnUrl = '/welcome';
+
   username = '';
   password = '';
   errorMessage = '';
   loading = false;
 
-  private readonly apiUrl = 'https://localhost:7015/api/users/login';
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
-    private router: Router,
-    private http: HttpClient
+    private readonly router: Router,
+    private readonly loginAppService: LoginAppService
   ) {}
 
-  onLogin(): void {
-    const username = this.username.trim();
-    const password = this.password.trim();
+  ngOnInit(): void {
+    this.initializeForm();
+  }
 
-    if (!username || !password) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['returnUrl']) {
+      const currentValue = changes['returnUrl'].currentValue;
+      const previousValue = changes['returnUrl'].previousValue;
+
+      if (currentValue !== previousValue) {
+        console.log('returnUrl changed:', currentValue);
+      }
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  onLogin(): void {
+    const request = this.buildLoginRequest();
+
+    if (!request) {
       this.errorMessage = 'กรุณากรอกชื่อผู้ใช้และรหัสผ่าน';
       return;
     }
@@ -35,31 +67,44 @@ export class Login {
     this.loading = true;
     this.errorMessage = '';
 
-    const payload = {
+    this.loginAppService
+      .login(request)
+      .pipe(
+        takeUntil(this.destroy$),
+        finalize(() => {
+          this.loading = false;
+        })
+      )
+      .subscribe({
+        next: (response) => {
+          this.router.navigate([this.returnUrl], {
+            state: { username: response.username }
+          });
+        },
+        error: (error: AppError) => {
+          this.errorMessage = error.message;
+        }
+      });
+  }
+
+  private initializeForm(): void {
+    this.username = '';
+    this.password = '';
+    this.errorMessage = '';
+    this.loading = false;
+  }
+
+  private buildLoginRequest(): LoginRequest | null {
+    const username = this.username.trim();
+    const password = this.password;
+
+    if (!username || !password) {
+      return null;
+    }
+
+    return {
       username,
       password
     };
-
-    this.http.post<any>(this.apiUrl, payload).subscribe({
-      next: (res) => {
-        const loggedInUsername = res?.username || username;
-
-        this.router.navigate(['/welcome'], {
-          state: { username: loggedInUsername }
-        });
-      },
-      error: (err) => {
-        if (err.status === 401) {
-          this.errorMessage = 'ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง';
-        } else {
-          this.errorMessage = 'ไม่สามารถเชื่อมต่อเซิร์ฟเวอร์ได้';
-        }
-
-        this.loading = false;
-      },
-      complete: () => {
-        this.loading = false;
-      }
-    });
   }
 }
