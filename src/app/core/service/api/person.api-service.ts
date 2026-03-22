@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { PersonItem } from '../../../models/person-model';
-import { PageResponse, PaginationRequest } from '../../../models/common-model';
+import { PersonItem } from '../../models/person-model';
+import { PageResponse, PaginationRequest } from '../../models/common-model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PersonService {
+
+export class PersonAPIService {
   private readonly mockPersons: PersonItem[] = [
     {
       id: 1,

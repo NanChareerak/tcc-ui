@@ -9,8 +9,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 
 import { PaginationRequest } from '../../../core/models/common-model';
 import { PersonItem } from '../../../core/models/person-model';
-import { PersonService } from '../../../core/service/api/api/person.service';
 import { PersonModalComponent, PersonFormModel } from '../person-modal/person-modal';
+import { PersonAPIService } from '../../../core/service/api/person.api-service';
 
 @Component({
   selector: 'app-person-list',
@@ -53,7 +53,9 @@ export class PersonList implements OnInit {
     address: '',
   };
 
-  constructor(private personService: PersonService) {}
+  constructor(
+    private personAPIService: PersonAPIService
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -64,7 +66,7 @@ export class PersonList implements OnInit {
     this.request.take = this.request.pageSize;
     this.request.keyword = this.searchKeyword.trim();
 
-    const response = this.personService.getPersons(this.request);
+    const response = this.personAPIService.getPersons(this.request);
 
     this.persons = response.datas;
     this.total = response.total;
