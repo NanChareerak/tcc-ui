@@ -1,0 +1,32 @@
+<nz-modal
+  [nzVisible]="visible"
+  [nzTitle]="title"
+  [nzFooter]="null"
+  [nzClosable]="true"
+  [nzMaskClosable]="false"
+  (nzOnCancel)="onCancel()">
+  <ng-container *nzModalContent>
+    <form [formGroup]="form" nz-form nzLayout="vertical">
+      <nz-form-item>
+        <nz-form-label nzRequired>เหตุผล :</nz-form-label>
+        <nz-form-control>
+          <textarea
+            nz-input
+            rows="5"
+            formControlName="reason">
+          </textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <div class="modal-actions">
+        <button nz-button nzType="primary" type="button" (click)="onSubmit()">
+          {{ submitText }}
+        </button>
+
+        <button nz-button nzDanger type="button" (click)="onCancel()">
+          ยกเลิก
+        </button>
+      </div>
+    </form>
+  </ng-container>
+</nz-modal>

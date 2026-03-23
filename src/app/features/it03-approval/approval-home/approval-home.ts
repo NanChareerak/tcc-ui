@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
+import { ApprovalListComponent } from '../approval-list/approval-list';
+
 
 @Component({
   selector: 'app-approval-home',
-  imports: [],
+  standalone: true,
+  imports: [ApprovalListComponent],
   templateUrl: './approval-home.html',
-  styleUrl: './approval-home.scss',
+  styleUrl: './approval-home.scss'
 })
-export class ApprovalHome {}
+export class ApprovalHomeComponent {}

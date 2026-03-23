@@ -1,34 +1,55 @@
-import { Injectable, inject } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Injectable, inject, signal } from '@angular/core';
+import { tap } from 'rxjs/operators';
 
 import { ApprovalApiService } from '../api/approval.api-service';
 import {
   ApprovalModel,
+  ApprovalSearchRequest,
   ApproveApprovalRequest,
-  GetApprovalListRequest,
   RejectApprovalRequest
 } from '../../models/approval-model';
-import {  ApiListResponse, ApiResponse, AppError } from '../../models/common-model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApprovalAppService {
   private readonly approvalApiService = inject(ApprovalApiService);
 
-  getList(request: GetApprovalListRequest): Observable<ApiListResponse<ApprovalModel>> {
-    return this.approvalApiService.getList(request);
-  }
+  readonly items = signal<ApprovalModel[]>([]);
+  readonly total = signal(0);
+  readonly page = signal(1);
+  readonly pageSize = signal(10);
+  readonly totalPages = signal(0);
 
-  approve(request: ApproveApprovalRequest): Observable<number> {
-    return this.approvalApiService.approve(request).pipe(
-      map((response) => response.data)
+  search(request?: Partial<ApprovalSearchRequest>) {
+    const page = request?.page ?? this.page();
+    const pageSize = request?.pageSize ?? this.pageSize();
+
+    const payload: ApprovalSearchRequest = {
+      page,
+      pageSize,
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+      keyword: request?.keyword ?? '',
+      statusCode: request?.statusCode ?? ''
+    };
+
+    return this.approvalApiService.getList(payload).pipe(
+      tap((response) => {
+        this.items.set(response.datas ?? []);
+        this.total.set(response.total ?? 0);
+        this.page.set(response.page ?? page);
+        this.pageSize.set(response.pageSize ?? pageSize);
+        this.totalPages.set(response.totalPages ?? 0);
+      })
     );
   }
 
-  reject(request: RejectApprovalRequest): Observable<number> {
-    return this.approvalApiService.reject(request).pipe(
-      map((response) => response.data)
-    );
+  approve(request: ApproveApprovalRequest) {
+    return this.approvalApiService.approve(request);
+  }
+
+  reject(request: RejectApprovalRequest) {
+    return this.approvalApiService.reject(request);
   }
 }

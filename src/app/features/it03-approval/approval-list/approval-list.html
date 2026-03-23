@@ -1,1 +1,59 @@
-<p>approval-list works!</p>
+<div class="toolbar">
+  <button nz-button nzType="primary" type="button" (click)="openApproveModal()">
+    อนุมัติ
+  </button>
+
+  <button nz-button nzDanger type="button" (click)="openRejectModal()">
+    ไม่อนุมัติ
+  </button>
+</div>
+
+<nz-table
+  nzBordered
+  [nzData]="items()"
+  [nzLoading]="loading()"
+  [nzFrontPagination]="false"
+  [nzTotal]="total()"
+  [nzPageIndex]="page()"
+  [nzPageSize]="pageSize()"
+  (nzQueryParams)="onQueryParamsChange($event)">
+  <thead>
+    <tr>
+      <th nzWidth="70px">
+        <label
+          nz-checkbox
+          [ngModel]="allPendingChecked()"
+          (ngModelChange)="onCheckAll($event)">
+        </label>
+      </th>
+      <th>รายการ</th>
+      <th>เหตุผล</th>
+      <th nzWidth="160px">สถานะเอกสาร</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of items(); track item.id) {
+      <tr>
+        <td>
+          <label
+            nz-checkbox
+            [ngModel]="isChecked(item.id)"
+            [nzDisabled]="!isPending(item)"
+            (ngModelChange)="onChecked(item.id, $event)">
+          </label>
+        </td>
+        <td>{{ item.itemName }}</td>
+        <td>{{ item.requestReason }}</td>
+        <td>{{ item.statusName }}</td>
+      </tr>
+    }
+  </tbody>
+</nz-table>
+
+<app-approval-action-modal
+  [visible]="modalVisible()"
+  [mode]="modalMode()"
+  (closed)="closeModal()"
+  (submitted)="onSubmitAction($event)">
+</app-approval-action-modal>

@@ -3,46 +3,38 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
+import { mapHttpError } from '../../models/common-error';
 import {
-  ApprovalModel,
+  ApprovalActionResponse,
+  ApprovalListResponse,
+  ApprovalSearchRequest,
   ApproveApprovalRequest,
-  GetApprovalListRequest,
   RejectApprovalRequest
 } from '../../models/approval-model';
-import {  ApiListResponse, ApiResponse, AppError } from '../../models/common-model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApprovalApiService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = environment.apiUrl;
-  private readonly controller = '/api/approvals';
+  private readonly endpoint = '/api/approvals';
 
-  getList(request: GetApprovalListRequest): Observable<ApiListResponse<ApprovalModel>> {
+  getList(request: ApprovalSearchRequest): Observable<ApprovalListResponse> {
     return this.http
-      .post<ApiListResponse<ApprovalModel>>(`${this.baseUrl}${this.controller}/list`, request)
-      .pipe(catchError((error) => throwError(() => this.mapError(error))));
+      .post<ApprovalListResponse>(`${this.baseUrl}${this.endpoint}/list`, request)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(() => mapHttpError(error))));
   }
 
-  approve(request: ApproveApprovalRequest): Observable<ApiResponse<number>> {
+  approve(request: ApproveApprovalRequest): Observable<ApprovalActionResponse> {
     return this.http
-      .post<ApiResponse<number>>(`${this.baseUrl}${this.controller}/approve`, request)
-      .pipe(catchError((error) => throwError(() => this.mapError(error))));
+      .post<ApprovalActionResponse>(`${this.baseUrl}${this.endpoint}/approve`, request)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(() => mapHttpError(error))));
   }
 
-  reject(request: RejectApprovalRequest): Observable<ApiResponse<number>> {
+  reject(request: RejectApprovalRequest): Observable<ApprovalActionResponse> {
     return this.http
-      .post<ApiResponse<number>>(`${this.baseUrl}${this.controller}/reject`, request)
-      .pipe(catchError((error) => throwError(() => this.mapError(error))));
-  }
-
-  private mapError(error: HttpErrorResponse): AppError {
-    return {
-      code: error.error?.code ?? 'UNKNOWN_ERROR',
-      message: error.error?.message ?? 'เกิดข้อผิดพลาดที่ไม่คาดคิด',
-      status: error.status,
-      details: error.error
-    };
+      .post<ApprovalActionResponse>(`${this.baseUrl}${this.endpoint}/reject`, request)
+      .pipe(catchError((error: HttpErrorResponse) => throwError(() => mapHttpError(error))));
   }
 }

@@ -11,6 +11,7 @@ import { QrcodeHomeComponent } from './features/it07-qrcode/qrcode-home/qrcode-h
 import { BarcodeHome } from './features/it06-barcode/barcode-home/barcode-home';
 import { QuizHomeComponent } from './features/it08-quiz/quiz-home/quiz-home';
 import { CommentHomeComponent } from './features/it09-comment/comment-home/comment-home';
+import { ApprovalHomeComponent } from './features/it03-approval/approval-home/approval-home';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -25,10 +26,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: Dashboard },
-
       { path: 'it01-person', component: PersonHome, data: { title: 'IT01 - Person' } },
       { path: 'it02-auth', component: Login, data: { title: 'IT02 - Auth' } },
-      { path: 'it03-approval', component: ModulePlaceholder, data: { title: 'IT03 - Approval' } },
+      { path: 'it03-approval', component: ApprovalHomeComponent, data: { title: 'IT03 - Approval' } },
       { path: 'it04-profile', component: ProfileHome, data: { title: 'IT04 - Profile' } },
       { path: 'it05-queue', component: QrcodeHomeComponent, data: { title: 'IT05 - Queue' } },
       { path: 'it06-barcode', component: BarcodeHome, data: { title: 'IT06 - Barcode' } },

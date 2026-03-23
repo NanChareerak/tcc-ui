@@ -1,27 +1,24 @@
-export type ApprovalStatusCode = 'PENDING' | 'APPROVED' | 'REJECTED';
+import { ApiListResponse, ApiResponse, PaginationRequest } from './common-model';
 
 export interface ApprovalModel {
   id: number;
   itemName: string;
-  requestReason?: string;
-  statusCode: ApprovalStatusCode;
+  requestReason: string;
+  statusCode: string;
   statusName: string;
-  approvedReason?: string;
-  rejectedReason?: string;
-  actionBy?: string;
-  actionDate?: string;
-  createdBy: string;
-  createdDate: string;
-  updatedBy?: string;
-  updatedDate?: string;
+  approvedReason?: string | null;
+  rejectedReason?: string | null;
+  actionBy?: string | null;
+  actionDate?: string | null;
+  createdBy?: string | null;
+  createdDate?: string | null;
+  updatedBy?: string | null;
+  updatedDate?: string | null;
   isActive: boolean;
-
-  checked?: boolean;
 }
 
-export interface GetApprovalListRequest {
-  pageIndex: number;
-  pageSize: number;
+export interface ApprovalSearchRequest extends PaginationRequest {
+  statusCode?: string;
   keyword?: string;
 }
 
@@ -34,3 +31,7 @@ export interface RejectApprovalRequest {
   ids: number[];
   reason: string;
 }
+
+export type ApprovalListResponse = ApiListResponse<ApprovalModel>;
+export type ApprovalResponse = ApiResponse<ApprovalModel>;
+export type ApprovalActionResponse = ApiResponse<number>;
