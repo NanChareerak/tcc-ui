@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { PersonList } from '../person-list/person-list';
+import { PersonListComponent } from '../person-list/person-list';
+
 
 @Component({
   selector: 'app-person-home',
   standalone: true,
   imports:[
-    PersonList
+    PersonListComponent
   ],
   templateUrl: './person-home.html',
   styleUrl: './person-home.scss'

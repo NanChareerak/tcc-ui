@@ -1,20 +1,45 @@
+// ==============================
+// Request Models
+// ==============================
 
+export interface GetPersonListRequest {
+  pageIndex: number;
+  pageSize: number;
+  keyword?: string;
+}
 
-export interface PersonItem {
-  id: number;
+export interface CreatePersonRequest {
   firstName: string;
   lastName: string;
-  fullName?: string;
-  birthDate: string;
-  age: number;
+  dateOfBirth: string; // format: yyyy-MM-dd
   address: string;
 }
 
+export interface UpdatePersonRequest extends CreatePersonRequest {
+  id: number;
+}
 
-export interface PersonCreateRequest {
+
+// ==============================
+// Response Model (UI ใช้ตัวนี้)
+// ==============================
+
+export interface PersonModel {
+  id: number;
+
   firstName: string;
   lastName: string;
-  birthDate: string;
+  fullName: string;
+
+  dateOfBirth: string; // yyyy-MM-dd
   age: number;
+
   address: string;
+
+  // Base fields (จาก backend BaseEntity)
+  createdBy: string;
+  createdDate: string;
+  updatedBy?: string;
+  updatedDate?: string;
+  isActive: boolean;
 }

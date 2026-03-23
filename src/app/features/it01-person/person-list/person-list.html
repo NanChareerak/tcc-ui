@@ -48,7 +48,7 @@
         <tr>
           <td style="text-align: center;">{{ getDisplayId(i) }}</td>
           <td>{{ getFullName(item) }}</td>
-          <td>{{ item.birthDate }}</td>
+          <td>{{ item.dateOfBirth }}</td>
           <td style="text-align: center;">{{ item.age }}</td>
           <td>{{ item.address }}</td>
           <td style="text-align: center;">
@@ -63,11 +63,11 @@
 
   <div class="person-card__pagination">
     <div class="pagination-summary">
-      Total: {{ total }} | Page: {{ request.page }} / {{ totalPages || 1 }}
+      Total: {{ total }} | Page: {{ request.pageIndex }} / {{ totalPages || 1 }}
     </div>
 
     <nz-pagination
-      [nzPageIndex]="request.page"
+      [nzPageIndex]="request.pageIndex"
       [nzTotal]="total"
       [nzPageSize]="request.pageSize"
       [nzShowSizeChanger]="true"

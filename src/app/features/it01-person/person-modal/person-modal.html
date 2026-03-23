@@ -1,6 +1,6 @@
 <nz-modal
   [(nzVisible)]="visible"
-  [nzTitle]="isViewMode ? 'IT 01-3' : 'IT 01-2'"
+  [nzTitle]="isViewMode ? 'IT 01-3' : (isEditMode ? 'IT 01-4' : 'IT 01-2')"
   [nzFooter]="null"
   [nzClosable]="false"
   [nzMaskClosable]="false"
@@ -12,8 +12,8 @@
       <div class="row">
         <label>ชื่อ - สกุล</label>
         <div class="name">
-          <input [(ngModel)]="data.firstName" [disabled]="isViewMode" />
-          <input [(ngModel)]="data.lastName" [disabled]="isViewMode" />
+          <input [(ngModel)]="formData.firstName" [disabled]="isViewMode" />
+          <input [(ngModel)]="formData.lastName" [disabled]="isViewMode" />
         </div>
       </div>
 
@@ -21,7 +21,7 @@
         <label>วันเกิด</label>
         <input
           type="date"
-          [(ngModel)]="data.birthDate"
+          [(ngModel)]="formData.dateOfBirth"
           (ngModelChange)="onBirthDateChange()"
           [disabled]="isViewMode"
         />
@@ -29,20 +29,26 @@
 
       <div class="row">
         <label>อายุ</label>
-        <div>{{ data.age }} ปี</div>
+        <div>{{ formData.age }} ปี</div>
       </div>
 
       <div class="row">
         <label>ที่อยู่</label>
-        <textarea [(ngModel)]="data.address" [disabled]="isViewMode"></textarea>
+        <textarea [(ngModel)]="formData.address" [disabled]="isViewMode"></textarea>
       </div>
 
       <div class="actions">
         @if (!isViewMode) {
-          <button nz-button nzType="primary" (click)="onSave()">บันทึก</button>
-          <button nz-button nzDanger (click)="close()">ยกเลิก</button>
+          <button nz-button nzType="primary" type="button" (click)="onSave()">
+            บันทึก
+          </button>
+          <button nz-button nzDanger type="button" (click)="close()">
+            ยกเลิก
+          </button>
         } @else {
-          <button nz-button nzDanger (click)="close()">ปิด</button>
+          <button nz-button nzDanger type="button" (click)="close()">
+            ปิด
+          </button>
         }
       </div>
 

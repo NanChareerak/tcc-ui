@@ -24,6 +24,10 @@ export interface ApiListResponse<T> {
   datas: T[];
   message?: string;
   success: boolean;
+  total: number;
+  page: number;
+  pageSize: number;
+  totalPages: number;
 }
 
 export enum AppErrorCode {
