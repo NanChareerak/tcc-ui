@@ -1,0 +1,11 @@
+@if (result(); as resultData) {
+  <div class="exam-result-wrapper">
+    <button nz-button nzType="primary" type="button" (click)="retry()">
+      สอบอีกครั้ง
+    </button>
+
+    <div class="result-text">
+      คุณ {{ resultData.fullName }} สอบได้คะแนน : {{ resultData.score }}/{{ resultData.total }}
+    </div>
+  </div>
+}

@@ -1,0 +1,48 @@
+.queue-home-page {
+  padding: 24px;
+}
+
+.page-header {
+  margin-bottom: 20px;
+
+  h1 {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 700;
+    color: #172033;
+  }
+
+  .breadcrumb {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 18px;
+  }
+}
+
+.page-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 24px;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.queue-box {
+  width: 420px;
+  min-height: 260px;
+  border-radius: 20px;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 36px;
+}
+
+.queue-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #2f54eb;
+}

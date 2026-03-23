@@ -1,0 +1,10 @@
+<div class="comment-input-row">
+  <nz-avatar [nzText]="authorInitial"></nz-avatar>
+
+  <input
+    nz-input
+    formControlName="message"
+    [formGroup]="form"
+    placeholder="Comment"
+    (keydown)="onKeydown($event)" />
+</div>

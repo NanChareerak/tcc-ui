@@ -1,0 +1,85 @@
+<div class="profile-list-card">
+  <div class="toolbar">
+    <div class="left-tools">
+      <input
+        nz-input
+        [(ngModel)]="keyword"
+        placeholder="Search name / address"
+        class="search-input"
+        (keyup.enter)="onSearch()"
+      />
+
+      <button nz-button type="button" (click)="onSearch()">Search</button>
+      <button nz-button type="button" (click)="onRefresh()">Refresh</button>
+    </div>
+
+    <button nz-button nzType="primary" type="button" (click)="onAdd()">Add</button>
+  </div>
+
+  <nz-table
+    #basicTable
+    [nzData]="items"
+    [nzFrontPagination]="false"
+    [nzLoading]="loading"
+    [nzShowPagination]="false"
+    [nzBordered]="true"
+    [nzNoResult]="emptyTpl"
+  >
+    <thead>
+      <tr>
+        <th class="col-no">No.</th>
+        <th>ชื่อ-สกุล</th>
+        <th>วันเกิด</th>
+        <th>อายุ</th>
+        <th>ที่อยู่</th>
+        <th class="col-action">Action</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (item of basicTable.data; track item.id; let i = $index) {
+        <tr>
+          <td>{{ (pageIndex - 1) * pageSize + i + 1 }}</td>
+          <td>{{ item.fullName }}</td>
+          <td>{{ item.birthDate }}</td>
+          <td>{{ item.age }}</td>
+          <td>{{ item.address || '-' }}</td>
+          <td>
+            <div class="action-buttons">
+              <button nz-button nzType="link" type="button" (click)="onEdit(item)">Edit</button>
+
+              <button
+                nz-button
+                nzType="link"
+                nzDanger
+                type="button"
+                nz-popconfirm
+                nzPopconfirmTitle="ยืนยันการลบข้อมูล?"
+                (nzOnConfirm)="onDelete(item)"
+              >
+                Delete
+              </button>
+            </div>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </nz-table>
+
+  <ng-template #emptyTpl>
+    <nz-empty nzNotFoundContent="ไม่มีข้อมูล"></nz-empty>
+  </ng-template>
+
+  <div class="footer-row">
+    <div>Total: {{ total }} | Page: {{ pageIndex }} / {{ totalPages }}</div>
+
+    <nz-pagination
+      [nzPageIndex]="pageIndex"
+      [nzTotal]="total"
+      [nzPageSize]="pageSize"
+      [nzShowSizeChanger]="false"
+      (nzPageIndexChange)="onPageIndexChange($event)"
+    >
+    </nz-pagination>
+  </div>
+</div>

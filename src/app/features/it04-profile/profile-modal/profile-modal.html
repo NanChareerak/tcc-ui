@@ -1,0 +1,126 @@
+<div class="profile-modal">
+  <div class="form-title">
+    {{ mode === 'edit' ? 'IT 04-2' : 'IT 04-1' }}
+  </div>
+
+  <form nz-form [formGroup]="form" nzLayout="vertical">
+    <div class="grid-2">
+      <nz-form-item>
+        <nz-form-label>First Name</nz-form-label>
+        <nz-form-control nzErrorTip="กรุณากรอก First Name">
+          <input nz-input formControlName="firstName" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Last Name</nz-form-label>
+        <nz-form-control nzErrorTip="กรุณากรอก Last Name">
+          <input nz-input formControlName="lastName" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="grid-2">
+      <nz-form-item>
+        <nz-form-label>Email</nz-form-label>
+        <nz-form-control nzErrorTip="Please provide a valid Email">
+          <input nz-input formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Phone</nz-form-label>
+        <nz-form-control nzErrorTip="Please provide a valid Phone">
+          <input nz-input formControlName="phone" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="grid-2">
+      <nz-form-item>
+        <nz-form-label>Profile</nz-form-label>
+        <nz-form-control nzErrorTip="Please selected any profile">
+          <div class="upload-row">
+            <input
+              class="file-input"
+              type="file"
+              accept="image/*"
+              (change)="onFileChange($event)"
+            />
+            <div class="file-name">
+              {{ selectedFileName || 'No file selected' }}
+            </div>
+          </div>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Birth Day</nz-form-label>
+        <nz-form-control nzErrorTip="Please provide a valid Birth Day">
+          <nz-date-picker
+            class="w-100"
+            nzFormat="dd/MM/yyyy"
+            formControlName="birthDate"
+          ></nz-date-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="grid-2">
+      <nz-form-item>
+        <nz-form-label>Occupation</nz-form-label>
+        <nz-form-control nzErrorTip="Please selected any Occupation">
+          <nz-select
+            formControlName="occupationId"
+            nzPlaceHolder="Select occupation"
+          >
+            @for (item of occupations; track item.id) {
+              <nz-option
+                [nzValue]="item.id"
+                [nzLabel]="item.name"
+              ></nz-option>
+            }
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Address</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="address" />
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="sex-row">
+      <label class="sex-label">Sex</label>
+      <nz-radio-group formControlName="sex">
+        <label nz-radio nzValue="M">Male</label>
+        <label nz-radio nzValue="F">Female</label>
+      </nz-radio-group>
+    </div>
+
+    <div class="button-row">
+      <button
+        nz-button
+        nzType="primary"
+        class="save-btn"
+        [disabled]="saving"
+        (click)="save()"
+        type="button"
+      >
+        Save
+      </button>
+
+      <button
+        nz-button
+        class="clear-btn"
+        [disabled]="saving"
+        (click)="clear()"
+        type="button"
+      >
+        Clear
+      </button>
+    </div>
+  </form>
+</div>

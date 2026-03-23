@@ -1,0 +1,68 @@
+.profile-modal {
+  padding: 8px;
+}
+
+.form-title {
+  margin: -24px -24px 24px -24px;
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: 600;
+  background: #46b04a;
+  color: #111;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.sex-row {
+  margin-top: 8px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sex-label {
+  min-width: 40px;
+  font-weight: 500;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.save-btn {
+  min-width: 120px;
+  background: #79b043;
+  border-color: #79b043;
+}
+
+.clear-btn {
+  min-width: 120px;
+}
+
+.upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.file-input {
+  width: 100%;
+}
+
+.file-name {
+  min-width: 180px;
+  font-size: 12px;
+  color: #666;
+}
+
+.w-100 {
+  width: 100%;
+}

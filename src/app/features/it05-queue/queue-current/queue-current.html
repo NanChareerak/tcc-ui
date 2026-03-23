@@ -1,0 +1,31 @@
+<div class="queue-current-page">
+  <div class="page-header">
+    <h1>Current Queue</h1>
+    <div class="breadcrumb">Home - Queue - Current</div>
+  </div>
+
+  <div class="page-card">
+    <nz-card class="current-card">
+      <div class="queue-sub-title">หมายเลขคิวปัจจุบัน</div>
+
+      <div class="queue-no">
+        {{ currentQueue()?.currentQueueNo || '--' }}
+      </div>
+
+      <div class="button-group">
+        <button
+          nz-button
+          nzType="primary"
+          type="button"
+          [nzLoading]="loading()"
+          (click)="onNextQueue()">
+          ลำดับถัดไป
+        </button>
+
+        <button nz-button type="button" (click)="goHome()">
+          กลับหน้ารับบัตรคิว
+        </button>
+      </div>
+    </nz-card>
+  </div>
+</div>

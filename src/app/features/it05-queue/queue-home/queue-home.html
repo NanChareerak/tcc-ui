@@ -1,0 +1,21 @@
+<div class="queue-home-page">
+  <div class="page-header">
+    <h1>Queue</h1>
+    <div class="breadcrumb">Home - Queue</div>
+  </div>
+
+  <div class="page-card">
+    <div class="queue-box">
+      <div class="queue-title">รับบัตรคิว</div>
+
+      <button
+        nz-button
+        nzType="primary"
+        nzSize="large"
+        [nzLoading]="loading()"
+        (click)="onIssueQueue()">
+        รับบัตรคิว
+      </button>
+    </div>
+  </div>
+</div>

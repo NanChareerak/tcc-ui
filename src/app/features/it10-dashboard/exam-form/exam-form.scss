@@ -1,0 +1,31 @@
+.exam-form-wrapper {
+  max-width: 680px;
+}
+
+.name-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.question-list {
+  margin-bottom: 20px;
+}
+
+.question-item {
+  margin-bottom: 28px;
+}
+
+.question-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+nz-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

@@ -1,0 +1,47 @@
+.profile-list-card {
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #d9e2ec;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.left-tools {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-input {
+  width: 240px;
+}
+
+.col-no {
+  width: 80px;
+  text-align: center;
+}
+
+.col-action {
+  width: 180px;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}

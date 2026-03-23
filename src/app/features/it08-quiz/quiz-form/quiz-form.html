@@ -1,0 +1,46 @@
+<form nz-form [formGroup]="form" nzLayout="vertical" class="quiz-form">
+  <nz-form-item>
+    <nz-form-label nzRequired>คำถาม</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="question" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>คำตอบ 1</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="answer1" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>คำตอบ 2</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="answer2" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>คำตอบ 3</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="answer3" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired>คำตอบ 4</nz-form-label>
+    <nz-form-control>
+      <input nz-input formControlName="answer4" />
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="form-actions">
+    <button nz-button nzType="primary" type="button" [nzLoading]="saving()" (click)="onSubmit()">
+      บันทึก
+    </button>
+
+    <button nz-button nzDanger type="button" (click)="onCancel()">
+      ยกเลิก
+    </button>
+  </div>
+</form>

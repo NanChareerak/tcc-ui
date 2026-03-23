@@ -1,0 +1,70 @@
+<div class="toolbar">
+  <form nz-form [formGroup]="form" class="add-form">
+    <label class="input-label">รหัสสินค้า</label>
+
+    <input
+      nz-input
+      formControlName="productCode"
+      placeholder="XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX"
+      maxlength="35"
+      (input)="onProductCodeInput($event)" />
+
+    <button nz-button nzType="primary" type="button" (click)="onAdd()">
+      ADD
+    </button>
+  </form>
+</div>
+
+<div class="validation-text">
+  รูปแบบ: XXXXX-XXXXX-XXXXX-XXXXX-XXXXX-XXXXX
+</div>
+
+<nz-table
+  nzBordered
+  [nzData]="items()"
+  [nzLoading]="loading()"
+  [nzFrontPagination]="false"
+  [nzTotal]="total()"
+  [nzPageIndex]="page()"
+  [nzPageSize]="pageSize()"
+  (nzQueryParams)="onQueryParamsChange($event)">
+  <thead>
+    <tr>
+      <th nzWidth="80px">Id</th>
+      <th>รหัสสินค้า (30 หลัก)</th>
+      <th nzWidth="110px">View</th>
+      <th nzWidth="110px">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (item of items(); track item.id) {
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.productCode }}</td>
+        <td>
+          <button nz-button nzType="primary" nzSize="small" type="button" (click)="onView(item)">
+            QR
+          </button>
+        </td>
+        <td>
+          <button
+            nz-button
+            nzDanger
+            nzSize="small"
+            type="button"
+            nz-popconfirm
+            nzPopconfirmTitle="ต้องการลบข้อมูล รหัสสินค้า {{ item.productCode }} หรือไม่?"
+            nzPopconfirmOkText="ยืนยัน"
+            nzPopconfirmCancelText="ยกเลิก"
+            (nzOnConfirm)="onDelete(item)">
+            ลบ
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</nz-table>
+
+<app-qrcode-modal
+  [visible]="modalVisible()"
+  (closed)="closeModal()" />

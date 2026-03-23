@@ -1,0 +1,10 @@
+.comment-input-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+input[nz-input] {
+  flex: 1;
+}

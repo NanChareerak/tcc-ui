@@ -1,0 +1,36 @@
+@if (!result()) {
+  <div class="exam-form-wrapper">
+    <div class="name-row">
+      <label>ชื่อ-สกุล</label>
+      <input nz-input [formControl]="form.controls.fullName" />
+    </div>
+
+    <div class="question-list">
+      @for (item of questions(); track item.id) {
+        <div class="question-item">
+          <div class="question-title">
+            {{ item.questionNo }}. {{ item.question }}
+          </div>
+
+          <nz-radio-group
+            [ngModel]="answers()[item.id]"
+            (ngModelChange)="onSelectAnswer(item.id, $event)">
+            <label nz-radio [nzValue]="1">{{ item.answer1 }}</label>
+            <label nz-radio [nzValue]="2">{{ item.answer2 }}</label>
+            <label nz-radio [nzValue]="3">{{ item.answer3 }}</label>
+            <label nz-radio [nzValue]="4">{{ item.answer4 }}</label>
+          </nz-radio-group>
+        </div>
+      }
+    </div>
+
+    <button
+      nz-button
+      nzType="primary"
+      type="button"
+      [nzLoading]="loading()"
+      (click)="onSubmit()">
+      ส่งคำตอบ
+    </button>
+  </div>
+}

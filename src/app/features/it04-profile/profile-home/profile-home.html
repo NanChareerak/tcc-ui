@@ -1,0 +1,17 @@
+<div class="page-wrapper">
+  <div class="page-header">
+    <h1>Profile</h1>
+    <div class="breadcrumb">Home - Profile</div>
+  </div>
+
+  <div class="content-card">
+    <div class="section-title">Profile Management</div>
+
+    <div class="list-frame">
+      <app-profile-list
+        (add)="openCreateModal()"
+        (edit)="openEditModal($event)"
+      ></app-profile-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="quiz-layout">
+  <div class="list-panel" [class.hide-panel]="formVisible()">
+    <button nz-button nzType="primary" type="button" (click)="openForm()">
+      เพิ่มข้อสอบ
+    </button>
+
+    <div class="quiz-items">
+      @for (item of items(); track item.id) {
+        <div class="quiz-item">
+          <div class="quiz-question-row">
+            <div class="question-text">
+              {{ item.questionNo }}. {{ item.question }}
+            </div>
+
+            <button
+              nz-button
+              nzDanger
+              nzSize="small"
+              type="button"
+              nz-popconfirm
+              nzPopconfirmTitle="ต้องการลบข้อสอบข้อนี้หรือไม่?"
+              nzPopconfirmOkText="ตกลง"
+              nzPopconfirmCancelText="ยกเลิก"
+              (nzOnConfirm)="onDelete(item)">
+              ลบ
+            </button>
+          </div>
+
+          <div class="choice-list">
+            <div class="choice-item">
+              <span class="radio-dot"></span>
+              <span>{{ item.answer1 }}</span>
+            </div>
+            <div class="choice-item">
+              <span class="radio-dot"></span>
+              <span>{{ item.answer2 }}</span>
+            </div>
+            <div class="choice-item">
+              <span class="radio-dot"></span>
+              <span>{{ item.answer3 }}</span>
+            </div>
+            <div class="choice-item">
+              <span class="radio-dot"></span>
+              <span>{{ item.answer4 }}</span>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (!loading() && items().length === 0) {
+        <div class="empty-state">ไม่มีข้อมูลข้อสอบ</div>
+      }
+    </div>
+  </div>
+
+  @if (formVisible()) {
+    <div class="form-panel">
+      <app-quiz-form
+        (closed)="closeForm()"
+        (saved)="handleSaved()">
+      </app-quiz-form>
+    </div>
+  }
+</div>

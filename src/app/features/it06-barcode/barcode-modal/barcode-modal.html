@@ -1,0 +1,47 @@
+<nz-modal
+  [nzVisible]="visible"
+  [nzTitle]="mode === 'create' ? 'Add Barcode' : 'Edit Barcode'"
+  [nzClosable]="true"
+  [nzMaskClosable]="false"
+  [nzOkLoading]="saving()"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleSubmit()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="form" nzLayout="vertical">
+      <nz-form-item>
+        <nz-form-label nzRequired>Code</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="code" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label nzRequired>Name</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="name" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Description</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input rows="3" formControlName="description"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Image URL</nz-form-label>
+        <nz-form-control>
+          <input nz-input formControlName="imageUrl" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label>Status</nz-form-label>
+        <nz-form-control>
+          <nz-switch formControlName="isActive"></nz-switch>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

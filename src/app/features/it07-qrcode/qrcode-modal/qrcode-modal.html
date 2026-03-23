@@ -1,0 +1,25 @@
+<nz-modal
+  [nzVisible]="visible"
+  [nzTitle]="'QR Code'"
+  [nzClosable]="true"
+  [nzMaskClosable]="false"
+  [nzFooter]="modalFooter"
+  (nzOnCancel)="handleClose()">
+  <ng-container *nzModalContent>
+    <div class="qr-modal-body">
+      @if (qrImageSrc) {
+        <img [src]="qrImageSrc" alt="QR Code" class="qr-image" />
+      } @else {
+        <div class="empty-qr">ไม่พบ QR Code</div>
+      }
+
+      <div class="product-code">
+        {{ selectedQr()?.productCode || '-' }}
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleClose()">Close</button>
+  </ng-template>
+</nz-modal>

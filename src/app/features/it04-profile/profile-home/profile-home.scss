@@ -1,0 +1,46 @@
+.page-wrapper {
+  padding: 24px;
+  background: #eef3f8;
+  min-height: 100vh;
+}
+
+.page-header {
+  margin-bottom: 24px;
+
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #182033;
+  }
+
+  .breadcrumb {
+    margin-top: 8px;
+    color: #6b7280;
+    font-size: 16px;
+  }
+}
+
+.content-card {
+  background: #f8fafc;
+  border-radius: 24px;
+  padding: 28px;
+  min-height: 500px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #273142;
+  margin-bottom: 20px;
+}
+
+.list-frame {
+  border: 2px dashed #c9d6e5;
+  border-radius: 24px;
+  padding: 20px;
+  min-height: 420px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}

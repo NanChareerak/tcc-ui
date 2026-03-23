@@ -1,0 +1,36 @@
+<div class="thread-wrapper">
+  @if (post(); as postData) {
+    <div class="post-card">
+      <div class="post-header">
+        <nz-avatar [nzText]="postData.authorInitial"></nz-avatar>
+
+        <div class="post-meta">
+          <div class="author-name">{{ postData.authorName }}</div>
+          <div class="post-date">{{ postData.postedAt }}</div>
+        </div>
+      </div>
+
+      <div class="post-image-wrap">
+        <img [src]="postData.imageUrl" alt="post image" class="post-image" />
+      </div>
+    </div>
+  }
+
+  <div class="comment-section">
+    @for (item of comments(); track item.id) {
+      <div class="comment-row">
+        <nz-avatar [nzText]="item.authorInitial"></nz-avatar>
+
+        <div class="comment-content">
+          <div class="comment-author">{{ item.authorName }}</div>
+          <div class="comment-message">{{ item.message }}</div>
+        </div>
+      </div>
+    }
+
+    <app-comment-input
+      [postId]="postId"
+      [authorName]="'Blend 285'"
+      (submitted)="handleSubmitted()" />
+  </div>
+</div>
